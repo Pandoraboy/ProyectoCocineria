@@ -1,10 +1,7 @@
-import {json} from 'express';
-import indexRoutes from './routes/index.routes.js';
-import { PORT, HOST } from './config/configEnv.js';
-import { connectDB } from './config/configDb.js';
-const express = require('express')
-const app = express();
-const port = 3000;
+import express, {json} from 'express';
+import indexRoutes from './src/routes/index.routes.js';
+import { PORT, HOST } from './src/config/configEnv.js';
+import { connectDB } from './src/config/configDb.js';
 
 async function setupServer() {
     try {
@@ -15,8 +12,8 @@ async function setupServer() {
         app.use('api', indexRoutes)
         
         app.listen(PORT, () => {
-            console.log('Servidor corriendo en: http://${HOST}:${port}/api');
-        })
+            console.log(`Servidor corriendo en: http://${HOST}:${PORT}/api`);
+        });
         }
      catch (error) {
         console.error("Error en index.js -> setupServer(), el error es: ", error)
