@@ -9,7 +9,7 @@ async function setupServer() {
 
         app.use(json());
 
-        app.use('api', indexRoutes)
+        app.use('/api', indexRoutes)
         
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en: http://${HOST}:${PORT}/api`);
