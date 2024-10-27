@@ -17,8 +17,6 @@ CREATE TABLE Turno(
     Fecha DATE NOT NULL,
     HoraInicio TIME NOT NULL,
     HoraFin TIME NOT NULL
-    --FOREIGN KEY (InventarioID) REFERENCES Inventario(InventarioID),
-    --FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID)
 );
 
 CREATE TABLE Empleado(
