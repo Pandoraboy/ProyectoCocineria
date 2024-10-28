@@ -10,6 +10,7 @@ CREATE TABLE Pedido(
     Fecha DATE NOT NULL,
     Estado VARCHAR(100) NOT NULL,
     FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID)
+    prueba123
 );
 
 CREATE TABLE Turno(
