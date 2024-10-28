@@ -4,6 +4,12 @@ CREATE TABLE Cliente (
     Contacto VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE Administrador(
+    AdministradorID INT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Contacto VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE Menu(
     MenuID INT PRIMARY KEY,
     ClienteID INT NOT NULL, 
@@ -27,7 +33,6 @@ CREATE TABLE Turno(
     AdministradorID INT NOT NULL,
     Fecha DATE NOT NULL,
     HoraInicio TIME NOT NULL,
-<<<<<<< HEAD
     HoraFin TIME NOT NULL,
     FOREIGN KEY (AdministradorID) REFERENCES Administrador(AdministradorID)
 );
@@ -40,9 +45,6 @@ CREATE TABLE Inventario(
     Estado VARCHAR(100) NOT NULL,    
     FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID)
 );
-=======
-    HoraFin TIME NOT NULL
->>>>>>> f378850d51b58b361c155fa7169055e8e29e8845
 
 CREATE TABLE Empleado(
     EmpleadoID INT PRIMARY KEY,
@@ -63,12 +65,6 @@ CREATE TABLE Chef(
     EmpleadoID INT PRIMARY KEY,
     Especialidad VARCHAR(100) NOT NULL, 
     FOREIGN KEY (EmpleadoID) REFERENCES Empleado(EmpleadoID)    
-);
-
-CREATE TABLE Administrador(
-    AdministradorID INT PRIMARY KEY,
-    EmpleadoID INT PRIMARY KEY,
-    FOREIGN KEY (EmpleadoID) REFERENCES Empleado(EmpleadoID)
 );
 
 CREATE TABLE Pedido(
