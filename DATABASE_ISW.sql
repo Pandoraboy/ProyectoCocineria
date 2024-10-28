@@ -4,6 +4,12 @@ CREATE TABLE Cliente (
     Contacto VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE Administrador(
+    AdministradorID INT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Contacto VARCHAR(100) NOT NULL
+);
+
 CREATE TABLE Menu(
     MenuID INT PRIMARY KEY,
     ClienteID INT NOT NULL, 
@@ -59,12 +65,6 @@ CREATE TABLE Chef(
     EmpleadoID INT PRIMARY KEY,
     Especialidad VARCHAR(100) NOT NULL, 
     FOREIGN KEY (EmpleadoID) REFERENCES Empleado(EmpleadoID)    
-);
-
-CREATE TABLE Administrador(
-    AdministradorID INT PRIMARY KEY,
-    EmpleadoID INT PRIMARY KEY,
-    FOREIGN KEY (EmpleadoID) REFERENCES Empleado(EmpleadoID)
 );
 
 CREATE TABLE Pedido(
