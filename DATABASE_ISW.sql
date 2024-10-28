@@ -27,7 +27,6 @@ CREATE TABLE Turno(
     AdministradorID INT NOT NULL,
     Fecha DATE NOT NULL,
     HoraInicio TIME NOT NULL,
-<<<<<<< HEAD
     HoraFin TIME NOT NULL,
     FOREIGN KEY (AdministradorID) REFERENCES Administrador(AdministradorID)
 );
@@ -40,9 +39,6 @@ CREATE TABLE Inventario(
     Estado VARCHAR(100) NOT NULL,    
     FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID)
 );
-=======
-    HoraFin TIME NOT NULL
->>>>>>> f378850d51b58b361c155fa7169055e8e29e8845
 
 CREATE TABLE Empleado(
     EmpleadoID INT PRIMARY KEY,
