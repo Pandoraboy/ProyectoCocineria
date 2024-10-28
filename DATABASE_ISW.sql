@@ -133,5 +133,3 @@ CREATE TABLE Formado(
     FOREIGN KEY (PlatoID) REFERENCES Plato(PlatoID),
     FOREIGN KEY (IngredienteID) REFERENCES Ingrediente(IngredienteID)
 );
-
-
