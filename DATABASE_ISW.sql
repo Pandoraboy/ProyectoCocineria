@@ -1,3 +1,5 @@
+1235456789
+
 CREATE TABLE Cliente (
     ClienteID INT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
