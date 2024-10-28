@@ -1,3 +1,5 @@
+
+
 CREATE TABLE Cliente (
     ClienteID INT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
@@ -18,7 +20,6 @@ CREATE TABLE Turno(
     HoraInicio TIME NOT NULL,
     HoraFin TIME NOT NULL
     --FOREIGN KEY (InventarioID) REFERENCES Inventario(InventarioID),
-    --FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID)
 );
 
 CREATE TABLE Empleado(
