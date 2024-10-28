@@ -1,24 +1,45 @@
-1235456789
-
 CREATE TABLE Cliente (
     ClienteID INT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
     Contacto VARCHAR(100) NOT NULL
 );
 
+CREATE TABLE Proveedor(
+    ProveedorID INT PRIMARY KEY,
+    Nombre VARCHAR(100) NOT NULL,
+    Contacto VARCHAR(100) NOT NULL,
+    Direccion VARCHAR(100) NOT NULL,
+    AdministradorID INT NOT NULL,
+    FOREIGN KEY (AdministradorID) REFERENCES Administrador(AdministradorID)
+);
+
+CREATE TABLE Menu(
+    MenuID INT PRIMARY KEY,
+    ClienteID INT NOT NULL, 
+    NombrePlato VARCHAR(100) NOT NULL,
+    Ingredientes VARCHAR(100) NOT NULL,
+    Valores VARCHAR(100) NOT NULL,
+    FOREIGN KEY (ClienteID) REFERENCES Menu(ClienteID)
+)
+
 CREATE TABLE Pedido(
     PedidoID INT PRIMARY KEY,
     ClienteID INT NOT NULL,
+    MeseroID INT NOT NULL,
     Fecha DATE NOT NULL,
     Estado VARCHAR(100) NOT NULL,
-    FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID)
+    Total INT NOT NULL,
+    FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID),
+    FOREIGN KEY (MeseroID) REFERENCES Mesero(MeseroID)
 );
 
 CREATE TABLE Turno(
     TurnoID INT PRIMARY KEY,
+    AdministradorID INT NOT NULL,
     Fecha DATE NOT NULL,
     HoraInicio TIME NOT NULL,
-    HoraFin TIME NOT NULL
+    HoraFin TIME NOT NULL,
+    FOREIGN KEY (AdministradorID) REFERENCES Administrador(AdministradorID)
 );
 
 CREATE TABLE Empleado(
@@ -61,17 +82,6 @@ CREATE TABLE Inventario(
     Estado VARCHAR(100) NOT NULL,
     ProveedorID INT NOT NULL,
     FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID)
-);
-
-CREATE TABLE Proveedor(
-    ProveedorID INT PRIMARY KEY,
-    Nombre VARCHAR(100) NOT NULL,
-    Contacto VARCHAR(100) NOT NULL,
-    Direccion VARCHAR(100) NOT NULL,
-    AdministradorID INT NOT NULL,
-    InventarioID INT NOT NULL,
-    FOREIGN KEY (AdministradorID) REFERENCES Administrador(AdministradorID),
-    FOREIGN KEY (InventarioID) REFERENCES Inventario(InventarioID)
 );
 
 CREATE TABLE Ingrediente(
