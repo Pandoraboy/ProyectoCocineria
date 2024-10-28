@@ -118,8 +118,6 @@ CREATE TABLE JefeCocina(
     FOREIGN KEY (ChefID) REFERENCES Chef(ChefID)
 );
 
---Relaciones--
-
 CREATE TABLE Contiene(
     PedidoID INT PRIMARY KEY,
     PlatoID INT PRIMARY KEY,
