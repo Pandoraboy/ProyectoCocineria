@@ -1,6 +1,6 @@
 import express, { json } from 'express'; 
 import indexRoutes from './routes/index.routes.js';
-import {PORT, HOST} from './config/configENV.js';
+import {PORT, HOST} from './config/configEnv.js';
 import { connectDB} from './config/configDb.js';
 
 async function setupServer() {
