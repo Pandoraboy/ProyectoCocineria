@@ -1,5 +1,3 @@
-1235456789
-
 CREATE TABLE Cliente (
     ClienteID INT PRIMARY KEY,
     Nombre VARCHAR(100) NOT NULL,
@@ -19,7 +17,6 @@ CREATE TABLE Turno(
     Fecha DATE NOT NULL,
     HoraInicio TIME NOT NULL,
     HoraFin TIME NOT NULL
-);
 
 CREATE TABLE Empleado(
     EmpleadoID INT PRIMARY KEY,
