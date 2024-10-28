@@ -1,11 +1,11 @@
-"use strinct";
-import {fileURLToPath} from "url";
+"use strict";
+import { fileURLToPath } from "url";
 import path from "path";
 import dotenv from "dotenv";
 
 const _filename = fileURLToPath(import.meta.url);
 
-const _dirname= path.dirname(_filename);
+const _dirname = path.dirname(_filename);
 
 const envFilePath = path.resolve(_dirname, ".env");
 

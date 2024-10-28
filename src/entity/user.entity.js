@@ -356,7 +356,7 @@ const IngredienteSchema = new EntitySchema({
         }
     }
 });
-const JefeCocinachema = new EntitySchema({
+const JefeCocinaSchema = new EntitySchema({
     name: "JefeCocina",
     tableName: "JefeCocina",
     columns:{
@@ -430,4 +430,20 @@ const FormadoSchema = new EntitySchema({
         }
     }
 });
-
+export {
+    ClienteSchema,
+    MenuSchema,
+    ProveedorSchema,
+    TurnoSchema,
+    InventarioSchema,
+    EmpleadoSchema,
+    MeseroSchema,
+    ChefSchema,
+    AdministradorSchema,
+    PedidoSchema,
+    PlatoSchema,
+    IngredienteSchema,
+    JefeCocinaSchema,
+    ContieneSchema,
+    FormadoSchema
+};
