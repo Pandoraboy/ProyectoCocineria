@@ -16,7 +16,7 @@ CREATE TABLE Menu(
     NombrePlato VARCHAR(100) NOT NULL,
     Ingredientes VARCHAR(100) NOT NULL,
     Valores VARCHAR(100) NOT NULL,
-    FOREIGN KEY (ClienteID) REFERENCES Menu(ClienteID)
+    FOREIGN KEY (ClienteID) REFERENCES Cliente(ClienteID)
 )
 
 CREATE TABLE Proveedor(
@@ -38,7 +38,7 @@ CREATE TABLE Turno(
 );
 
 CREATE TABLE Inventario(    
-    InventarioID INT PRIMARY KEY,
+    InventarioID INT PRIMARY KEY UNIQUE,
     ProveedorID INT NOT NULL,
     Fecha DATE NOT NULL,
     CantidadTotal INT NOT NULL,
@@ -55,15 +55,17 @@ CREATE TABLE Empleado(
 );
 
 CREATE TABLE Mesero(
-    MeseroID INT PRIMARY KEY,
-    EmpleadoID INT PRIMARY KEY,
+    MeseroID INT UNIQUE,
+    EmpleadoID INT,
+    PRIMARY KEY (MeseroID, EmpleadoID),
     FOREIGN KEY (EmpleadoID) REFERENCES Empleado(EmpleadoID)
 );
 
 CREATE TABLE Chef(
-    ChefID INT PRIMARY KEY,
-    EmpleadoID INT PRIMARY KEY,
+    ChefID INT UNIQUE,
+    EmpleadoID INT,
     Especialidad VARCHAR(100) NOT NULL, 
+    PRIMARY KEY (ChefID, EmpleadoID),
     FOREIGN KEY (EmpleadoID) REFERENCES Empleado(EmpleadoID)    
 );
 
@@ -84,7 +86,7 @@ CREATE TABLE Plato(
     MenuID INT NOT NULL,
     Nombre VARCHAR(100) NOT NULL,
     Descripcion TEXT,
-    Precio DECIMAL(10,2) NOT NULL
+    Precio DECIMAL(10,2) NOT NULL,
     Disponibilidad BOOLEAN NOT NULL,    
     FOREIGN KEY (InventarioID) REFERENCES Inventario(InventarioID),
     FOREIGN KEY (MenuID) REFERENCES Menu(MenuID)
@@ -102,8 +104,8 @@ CREATE TABLE Ingrediente(
 );
 
 CREATE TABLE JefeCocina(
-    JefeCocinaID INT PRIMARY KEY,
-    ChefID INT PRIMARY KEY,
+    JefeCocinaID INT,
+    ChefID INT,
     InventarioID INT NOT NULL,
     AdministradorID INT NOT NULL,
     PermisoInventario BOOLEAN NOT NULL,
@@ -111,19 +113,30 @@ CREATE TABLE JefeCocina(
     Estado VARCHAR(100) NOT NULL,
     FOREIGN KEY (InventarioID) REFERENCES Inventario(InventarioID),
     FOREIGN KEY (AdministradorID) REFERENCES Administrador(AdministradorID),
-    FOREIGN KEY (ChefID) REFERENCES Chef(ChefID)
+    FOREIGN KEY (ChefID) REFERENCES Chef(ChefID),
+    PRIMARY KEY (JefeCocinaID, ChefID)
 );
 
 CREATE TABLE Contiene(
-    PedidoID INT PRIMARY KEY,
-    PlatoID INT PRIMARY KEY,
+    PedidoID INT,
+    PlatoID INT,
     FOREIGN KEY (PedidoID) REFERENCES Pedido(PedidoID),
-    FOREIGN KEY (PlatoID) REFERENCES Plato(PlatoID)
+    FOREIGN KEY (PlatoID) REFERENCES Plato(PlatoID),
+    PRIMARY KEY (PedidoID, PlatoID)
 ); 
 
 CREATE TABLE Formado(
-    PlatoID INT PRIMARY KEY,
-    IngredienteID INT PRIMARY KEY,
+    PlatoID INT,
+    IngredienteID INT,
     FOREIGN KEY (PlatoID) REFERENCES Plato(PlatoID),
-    FOREIGN KEY (IngredienteID) REFERENCES Ingrediente(IngredienteID)
+    FOREIGN KEY (IngredienteID) REFERENCES Ingrediente(IngredienteID),
+    PRIMARY KEY (PlatoID, IngredienteID)
+);
+
+CREATE TABLE Provee(
+    ProveedorID INT,
+    IngredienteID INT,
+    FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID),
+    FOREIGN KEY (IngredienteID) REFERENCES Ingrediente(IngredienteID),
+    PRIMARY KEY (ProveedorID, IngredienteID)
 );
