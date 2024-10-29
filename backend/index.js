@@ -15,7 +15,7 @@ async function setupServer() {
             console.log(`Servidor corriendo en: http://${HOST}:${PORT}/api`);
         });
         }
-     catch (error) {
+    catch (error) {
         console.error("Error en index.js -> setupServer(), el error es: ", error)
     }
 }
