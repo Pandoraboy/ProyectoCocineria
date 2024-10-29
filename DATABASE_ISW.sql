@@ -132,3 +132,11 @@ CREATE TABLE Formado(
     FOREIGN KEY (IngredienteID) REFERENCES Ingrediente(IngredienteID),
     PRIMARY KEY (PlatoID, IngredienteID)
 );
+
+CREATE TABLE Provee(
+    ProveedorID INT,
+    IngredienteID INT,
+    FOREIGN KEY (ProveedorID) REFERENCES Proveedor(ProveedorID),
+    FOREIGN KEY (IngredienteID) REFERENCES Ingrediente(IngredienteID),
+    PRIMARY KEY (ProveedorID, IngredienteID)
+);
