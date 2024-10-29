@@ -7,7 +7,6 @@ export async function createUser(req, res) {
         const userRepository = AppDataSource.getRepository(User);
         const user = req.body;
 
-        // Validar si se proporcionaron los datos necesarios
         if (!user || !user.nombreCompleto || !user.rut || !user.email) {
             return res.status(400).json({
                 message: "Es necesario ingresar los datos del usuario.",
@@ -31,7 +30,7 @@ export async function createUser(req, res) {
         console.error("Error al crear un usuario, el error es: ", error);
         return res.status(500).json({
             message: "Error al crear el usuario.",
-            error: error.message // O cualquier otra información relevante
+            error: error.message 
         });
     }
 }
@@ -39,7 +38,7 @@ export async function createUser(req, res) {
 export async function getUsers(req, res) {
     try {
         const userRepository = AppDataSource.getRepository(User);
-        const users = await userRepository.find(); // Obtener todos los usuarios
+        const users = await userRepository.find(); 
 
         res.status(200).json({
             message: "Usuarios obtenidos exitosamente",
@@ -55,11 +54,11 @@ export async function getUsers(req, res) {
 }
 
 export async function getUser(req, res) {
-    const { id } = req.params; // Obtener el ID del usuario de los parámetros
+    const { id } = req.params; 
 
     try {
         const userRepository = AppDataSource.getRepository(User);
-        const user = await userRepository.findOneBy({ id }); // Buscar el usuario por ID
+        const user = await userRepository.findOneBy({ id }); 
 
         if (!user) {
             return res.status(404).json({
@@ -80,4 +79,66 @@ export async function getUser(req, res) {
         });
     }
 }
+
+export async function deleteUser(req, res) {
+    const { id } = req.params;
+
+    try {
+        const userRepository = AppDataSource.getRepository(User);
+        const user = await userRepository.findOneBy({ id });
+
+        if (!user) {
+            return res.status(404).json({
+                message: "Usuario no encontrado",
+                data: null
+            });
+        }
+
+        await userRepository.remove(user);
+
+        res.status(200).json({
+            message: "Usuario eliminado exitosamente",
+            data: user
+        });
+    } catch (error) {
+        console.error("Error al eliminar el usuario: ", error);
+        return res.status(500).json({
+            message: "Error al eliminar el usuario.",
+            error: error.message
+        });
+    }
+}
+
+export async function updateUser(req, res) {
+    const { id } = req.params;
+    const userData = req.body;
+
+    try {
+        const userRepository = AppDataSource.getRepository(User);
+        let user = await userRepository.findOneBy({ id });
+
+        if (!user) {
+            return res.status(404).json({
+                message: "Usuario no encontrado",
+                data: null
+            });
+        }
+
+        user = { ...user, ...userData };
+
+        const updatedUser = await userRepository.save(user);
+
+        res.status(200).json({
+            message: "Usuario actualizado exitosamente",
+            data: updatedUser
+        });
+    } catch (error) {
+        console.error("Error al actualizar el usuario: ", error);
+        return res.status(500).json({
+            message: "Error al actualizar el usuario.",
+            error: error.message
+        });
+    }
+}
+
 

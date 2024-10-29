@@ -28,14 +28,14 @@ const UserSchema = new EntitySchema({
             unique: true,
         },
         createdAt: {
-            type: "timestamp with time zone", // Cambiado a timestamp
+            type: "timestamp with time zone", 
             default: () => "CURRENT_TIMESTAMP",
             nullable: false,
         },
         updatedAt: {
-            type: "timestamp with time zone", // Cambiado a timestamp
+            type: "timestamp with time zone", 
             default: () => "CURRENT_TIMESTAMP",
-            onUpdate: "CURRENT_TIMESTAMP", // Podrías manejar esto manualmente
+            onUpdate: "CURRENT_TIMESTAMP", 
             nullable: false,
         } 
     }
