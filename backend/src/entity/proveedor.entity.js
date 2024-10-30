@@ -30,14 +30,14 @@ const ProveedorSchema = new EntitySchema({
             nullable: false,
         },
     },
-   // relations: {
-     //   administrador: {
-       //     target: "Administrador",
-         //   type: "many-to-one",
-           // joinColumn: { name: "administradorID" },
-          //  onDelete: "CASCADE",
-       // },
-   // },
+    relations: {
+        administrador: {
+            target: "Administrador",
+            type: "many-to-one",
+            joinColumn: { name: "administradorID" },
+            onDelete: "CASCADE",
+        },
+    },
 });
 
 export default ProveedorSchema;

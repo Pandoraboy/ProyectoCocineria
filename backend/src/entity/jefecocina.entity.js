@@ -1,6 +1,5 @@
 "use strict";
-//import nodemon from "nodemon";
-import { EntitySchema, Generated, Unique } from "typeorm";
+import { EntitySchema } from "typeorm";
 
 const JefeCocinaSchema = new EntitySchema({
     name: "JefeCocina",
@@ -8,7 +7,7 @@ const JefeCocinaSchema = new EntitySchema({
     columns:{
         JefeCocinaID:{
             type:"int",
-            primary: "true",
+            primary: true,
             Unique: true,
             length: 100
         },
@@ -27,20 +26,20 @@ const JefeCocinaSchema = new EntitySchema({
         }
     },
     relations: {
-        inventario: { // Definimos la relación con la entidad Cliente
+        inventario: { 
             type: "many-to-one",
             target: "Inventario",
-            joinColumn: { name: "InventarioID" } // Clave foránea en la tabla Pedido
+            joinColumn: { name: "InventarioID" } 
         },
         administrador:{
             type: "many-to-one",
             target:"Administrador",
-            joinColumn: {name: "AdministadorID"}
+            joinColumn: { name: "AdministadorID" }
         },
         chef:{
             type: "one-to-one",
             target:"Chef",
-            joinColumn: {name: "ChefID"}
+            joinColumn: { name: "ChefID" }
         }
     }
 });

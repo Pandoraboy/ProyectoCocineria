@@ -1,20 +1,19 @@
 "use strict";
-//import nodemon from "nodemon";
-import { EntitySchema, Generated, Unique } from "typeorm";
+import { EntitySchema } from "typeorm";
 
 const FormadoSchema = new EntitySchema({
     name: "Formado",
     tableName: "Formado",
     relations: {
-        plato: { // Definimos la relación con la entidad Cliente
+        plato: { 
             type: "many-to-one",
             target: "Plato",
-            joinColumn: { name: "PlatoID" } // Clave foránea en la tabla Pedido
+            joinColumn: { name: "PlatoID" } 
         },
         ingrediente:{
             type: "many-to-one",
             target:"Ingrediente",
-            joinColumn: {name: "IngredienteID"}
+            joinColumn: { name: "IngredienteID" }
         }
     }
 });

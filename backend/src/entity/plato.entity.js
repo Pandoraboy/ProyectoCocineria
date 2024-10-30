@@ -45,12 +45,12 @@ const PlatoSchema = new EntitySchema({
             joinColumn: { name: "inventarioID" },
             onDelete: "CASCADE",
         },
-   //     menu: {
-     //       target: "Menu",
-       //     type: "many-to-one",
-         //   joinColumn: { name: "menuID" },
-        //    onDelete: "CASCADE",
-       // },
+        menu: {
+            target: "Menu",
+            type: "many-to-one",
+            joinColumn: { name: "menuID" },
+            onDelete: "CASCADE",
+        },
     },
 });
 

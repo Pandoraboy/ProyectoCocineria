@@ -1,6 +1,5 @@
 "use strict";
-//import nodemon from "nodemon";
-import { EntitySchema, Generated, Unique } from "typeorm";
+import { EntitySchema } from "typeorm";
 
 const AdministradorSchema = new EntitySchema({
     name: "Administrador",
@@ -8,14 +7,14 @@ const AdministradorSchema = new EntitySchema({
     columns:{
         AdministradorID:{
             type:"int",
-            primary: "true",
+            primary: true,
         }
     },
     relations: {
-        empleado: { // Definimos la relación con la entidad Cliente
+        empleado: { 
             type: "many-to-one",
             target: "Empleado",
-            joinColumn: { name: "EmpleadoID" } // Clave foránea en la tabla Pedido
+            joinColumn: { name: "EmpleadoID" } 
         }
     }
 });

@@ -1,6 +1,5 @@
 "use strict";
-//import nodemon from "nodemon";
-import { EntitySchema, Generated, Unique } from "typeorm";
+import { EntitySchema } from "typeorm";
 
 const MenuSchema = new EntitySchema({
     name: "Menu",
@@ -8,7 +7,7 @@ const MenuSchema = new EntitySchema({
     columns:{
         MenuID:{
             type:"int",
-            primary: "true",
+            primary: true,
         },
         nombrePlato:{
             type: "varchar",
@@ -27,10 +26,10 @@ const MenuSchema = new EntitySchema({
         }
     },
     relations: {
-        Cliente: { // Definimos la relación con la entidad Cliente
+        Cliente: { 
             type: "one-to-one",
             target: "Cliente",
-            joinColumn: { name: "ClienteID" } // Clave foránea en la tabla Pedido
+            joinColumn: { name: "ClienteID" } 
         }
     }
 });

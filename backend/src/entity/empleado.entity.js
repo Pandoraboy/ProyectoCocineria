@@ -1,6 +1,5 @@
 "use strict";
-//import nodemon from "nodemon";
-import { EntitySchema, Generated, Unique } from "typeorm";
+import { EntitySchema } from "typeorm";
 
 const EmpleadoSchema = new EntitySchema({
     name: "Empleado",
@@ -8,8 +7,8 @@ const EmpleadoSchema = new EntitySchema({
     columns:{
         EmpleadoID:{
             type:"int",
-            primary: "true",
-            generated: "true"
+            primary: true,
+            generated: true
         },
         nombre:{
             type: "varchar",
@@ -23,10 +22,10 @@ const EmpleadoSchema = new EntitySchema({
         }
     },
     relations: {
-        turno: { // Definimos la relación con la entidad Cliente
+        turno: { 
             type: "many-to-one",
             target: "Turno",
-            joinColumn: { name: "TurnoID" } // Clave foránea en la tabla Pedido
+            joinColumn: { name: "TurnoID" } 
         }
     }
 });
