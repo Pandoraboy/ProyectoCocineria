@@ -15,6 +15,7 @@ export async function createCliente(req, res) {
         }
 
         const newCliente = clienteRepository.create({ ClienteID, Nombre, Contacto });
+
         const clienteSaved = await clienteRepository.save(newCliente);
 
         res.status(201).json({
@@ -35,6 +36,7 @@ export async function getCliente(req, res) {
         const cliente = await clienteRepository.find();
         res.status(200).json({
             message: "Cliente obtenidos exitosamente",
+
             data: cliente
         });
     } catch (error) {
@@ -108,7 +110,9 @@ export async function updateCliente(req, res) {
         const updateCliente = await clienteRepository.save(cliente);
         res.status(200).json({
             message: "Cliente actualizado exitosamente",
+
             data: updateCliente
+
         });
     } catch (error) {
         console.error("Error al actualizar Cliente: ", error);
