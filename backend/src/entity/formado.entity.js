@@ -8,12 +8,12 @@ const FormadoSchema = new EntitySchema({
         plato: { 
             type: "many-to-one",
             target: "Plato",
-            joinColumn: { name: "PlatoID" } 
+            joinColumn: { name: "platoID" } 
         },
         ingrediente:{
             type: "many-to-one",
             target:"Ingrediente",
-            joinColumn: { name: "IngredienteID" }
+            joinColumn: { name: "ingredienteID" }
         }
     }
 });

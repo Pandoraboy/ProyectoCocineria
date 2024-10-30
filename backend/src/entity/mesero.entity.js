@@ -8,13 +8,14 @@ const MeseroSchema = new EntitySchema({
         MeseroID:{
             type:"int",
             primary: true,
+            generated: true
         }
     },
     relations: {
         empleado: { 
             type: "many-to-one",
             target: "Empleado",
-            joinColumn: { name: "EmpleadoID" } 
+            joinColumn: { name: "empleadoID" } 
         }
     }
 });

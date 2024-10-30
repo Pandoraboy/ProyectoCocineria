@@ -16,14 +16,14 @@ const ProveeSchema = new EntitySchema({
             target: "Ingrediente",
             type: "many-to-many",
             joinTable: {
-                name: "IngredienteID" 
+                name: "ingredienteID" 
             }
         },
         proveedor: {
             target: "Proveedor",
             type: "many-to-many",
             joinTable: {
-                name: "ProveedorID" 
+                name: "proveedorID" 
             }
         }
     }

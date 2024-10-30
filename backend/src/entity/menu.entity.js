@@ -8,6 +8,7 @@ const MenuSchema = new EntitySchema({
         MenuID:{
             type:"int",
             primary: true,
+            generated: true,
         },
         nombrePlato:{
             type: "varchar",
@@ -29,7 +30,7 @@ const MenuSchema = new EntitySchema({
         Cliente: { 
             type: "one-to-one",
             target: "Cliente",
-            joinColumn: { name: "ClienteID" } 
+            joinColumn: { name: "clienteID" } 
         }
     }
 });

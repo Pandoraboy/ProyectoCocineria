@@ -8,8 +8,7 @@ const JefeCocinaSchema = new EntitySchema({
         JefeCocinaID:{
             type:"int",
             primary: true,
-            Unique: true,
-            length: 100
+            unique: true
         },
         permisoInventario:{
             type: "boolean",
@@ -21,7 +20,6 @@ const JefeCocinaSchema = new EntitySchema({
         },
         estado:{
             type:"int",
-            length:100,
             nullable:false
         }
     },
@@ -29,17 +27,17 @@ const JefeCocinaSchema = new EntitySchema({
         inventario: { 
             type: "many-to-one",
             target: "Inventario",
-            joinColumn: { name: "InventarioID" } 
+            joinColumn: { name: "inventarioID" } 
         },
         administrador:{
             type: "many-to-one",
             target:"Administrador",
-            joinColumn: { name: "AdministadorID" }
+            joinColumn: { name: "administadorID" }
         },
         chef:{
             type: "one-to-one",
             target:"Chef",
-            joinColumn: { name: "ChefID" }
+            joinColumn: { name: "chefID" }
         }
     }
 });

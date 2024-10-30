@@ -14,7 +14,7 @@ const AdministradorSchema = new EntitySchema({
         empleado: { 
             type: "many-to-one",
             target: "Empleado",
-            joinColumn: { name: "EmpleadoID" } 
+            joinColumn: { name: "empleadoID" } 
         }
     }
 });

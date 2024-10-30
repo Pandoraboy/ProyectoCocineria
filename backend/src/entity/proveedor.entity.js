@@ -21,8 +21,7 @@ const ProveedorSchema = new EntitySchema({
         },
         contacto: {
             type: "varchar",
-            length: 100,
-            nullable: false,
+            nullable: false
         },
         direccion: {
             type: "varchar",

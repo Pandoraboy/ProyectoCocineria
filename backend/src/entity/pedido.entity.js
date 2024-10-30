@@ -1,6 +1,5 @@
 "use strict";
-//import nodemon from "nodemon";
-import { EntitySchema, Generated, Unique } from "typeorm";
+import { EntitySchema } from "typeorm";
 
 const PedidoSchema = new EntitySchema({
     name: "Pedido",
@@ -8,36 +7,32 @@ const PedidoSchema = new EntitySchema({
     columns:{
         PedidoID:{
             type:"int",
-            primary: "true",
-            generated: true,
-            Unique: true
+            primary: true,
+            generated: true
         },
         fecha:{
             type: "date",
-            length: 100,
-            nullable: false,
+            nullable: false
         },
         estado:{
             type:"varchar",
-            length:100,
             nullable:false
         },
         total:{
             type:"int",
-            length:100,
             nullable:false
         }
     },
     relations: {
-        cliente: { // Definimos la relación con la entidad Cliente
+        cliente: { 
             type: "one-to-one",
             target: "Cliente",
-            joinColumn: { name: "ClienteID" } // Clave foránea en la tabla Pedido
+            joinColumn: { name: "ClienteID" } 
         },
         mesero:{
             type: "many-to-one",
             target:"Mesero",
-            joinColumn: {name: "MeseroID"}
+            joinColumn: { name: "meseroID" }
         }
     }
 });

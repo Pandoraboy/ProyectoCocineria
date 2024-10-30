@@ -11,8 +11,7 @@ const TurnoSchema = new EntitySchema({
         },
         fecha:{
             type: "date",
-            length: 100,
-            nullable: false,
+            nullable: false
         },
         horaInicio:{
             type: "timestamp wit time zone",
@@ -29,7 +28,7 @@ const TurnoSchema = new EntitySchema({
         administrador: { 
             type: "many-to-one",
             target: "Administrador",
-            joinColumn: { name: "AdministradorID" } 
+            joinColumn: { name: "administradorID" } 
         }
     }
 });

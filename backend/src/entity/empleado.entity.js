@@ -25,7 +25,7 @@ const EmpleadoSchema = new EntitySchema({
         turno: { 
             type: "many-to-one",
             target: "Turno",
-            joinColumn: { name: "TurnoID" } 
+            joinColumn: { name: "turnoID" } 
         }
     }
 });

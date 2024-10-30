@@ -24,12 +24,12 @@ const ContieneSchema = new EntitySchema({
         pedido: { 
             type: "many-to-one",
             target: "Pedido",
-            joinColumn: { name: "PedidoID" } 
+            joinColumn: { name: "pedidoID" } 
         },
         plato: {
             type: "many-to-one",
             target: "Plato",
-            joinColumn: { name: "PlatoID" }
+            joinColumn: { name: "platoID" }
         }
     }
 });
