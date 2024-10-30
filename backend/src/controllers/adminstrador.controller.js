@@ -1,6 +1,7 @@
 "use strict";
-import Administrador from '../entity/administrador.entity.js';
-import { AppDataSource } from '../config/configDb.js';
+import Administrador from "../entity/administrador.entity.js";
+import { AppDataSource } from "../config/configDb.js";
+
 
 export async function createAdministrador(req, res) {
     try {
@@ -82,7 +83,7 @@ export async function deleteAdministrador(req, res) {
                 data: null
             });
         }
-        await administradorRepository.delete(administrador);
+        await administradorRepository.delete(id); // Pasamos el id en lugar del objeto
         res.status(200).json({
             message: "Administrador eliminado exitosamente",
             data: administrador
@@ -96,6 +97,7 @@ export async function deleteAdministrador(req, res) {
     }
 }
 
+
 export async function updateAdministrador(req, res) {
     const { id } = req.params;
     const updateData = req.body;
@@ -108,7 +110,7 @@ export async function updateAdministrador(req, res) {
                 data: null
             });
         }
-        adminstrador = {...administrador, ...updateData};
+        administrador = { ...administrador, ...updateData };
         const updateAdministrador = await administradorRepository.save(administrador);
         res.status(200).json({
             message: "Administrador actualizado exitosamente",
