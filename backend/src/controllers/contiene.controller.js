@@ -32,7 +32,7 @@ export async function createContiene(req, res) {
     }
 }
 
-export async function getContiene(req, res) {
+export async function getContienen(req, res) {
     try {
         const contieneRepository = AppDataSource.getRepository(Contiene);
         const contiene = await contieneRepository.find();

@@ -29,7 +29,7 @@ export async function createCliente(req, res) {
         });
     }
 }
-export async function getCliente(req, res) {
+export async function getClientes(req, res) {
     try {
         const clienteRepository = AppDataSource.getRepository(Cliente);
         const cliente = await clienteRepository.find();

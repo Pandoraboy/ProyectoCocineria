@@ -1,27 +1,28 @@
 "use strict";
-import Pedido from '../entity/pedido.entity.js';
-import ClienteID from '../entity/cliente.entity.js';
-import MeseroID from '../entity/mesero.entity.js';
+import JefeDeCocina from '../entity/jefecocina.entity.js';
+import InventarioID from '../entity/inventario.entity.js';
+import AdministradorID from '../entity/administrador.entity.js';
+import ChefID from '../entity/chef.entity.js';
 import { AppDataSource } from '../config/configDb.js';
 
-export async function createPedido(req, res) {
+export async function createJefeCocina(req, res) {
     try {
-        const pedidoRepository = AppDataSource.getRepository(Pedido);
-        const { PedidoID, ClienteID, MeseroID, Fecha, Estado, Total } = req.body;
+        const jefedecocinaRepository = AppDataSource.getRepository(Jefedecocina);
+        const { JefeCocinaID, ChefID, InventarioID, AdministradorID, PermisoInventario, FechaAsigancionRol, Estado  } = req.body;
 
-        if (!PedidoID || !ClienteID || !MeseroID || !Fecha || !Estado || !Total) {
+        if (!JefeCocinaID || !ChefID || !InventarioID || !AdministradorID || !PermisoInventario || !FechaAsigancionRol || !Estado ) {
             return res.status(400).json({
                 message: "Todos los campos son obligatorios.",
                 data: null
             });
         }
 
-        const newPedido = pedidoRepository.create({ PedidoID, ClienteID, MeseroID, Fecha, Estado, Total});
-        const pedidoSaved = await pedidoRepository.save(newPedido);
+        const newJefedecocina = JefedecocinaRepository.create({ JefeCocinaID, ChefID, InventarioID, AdministradorID, PermisoInventario, FechaAsigancionRol, Estado });
+        const jefedecocinaSaved = await jefedecocinaRepository.save(newJefedecocina);
 
         res.status(201).json({
             message: "Pedido creado exitosamente",
-            data: pedidoSaved
+            data: jefedecocinaSaved
         });
     } catch (error) {
         console.error("Error al crear PEdido: ", error);
@@ -32,13 +33,13 @@ export async function createPedido(req, res) {
     }
 }
 
-export async function getPedidos(req, res) {
+export async function getJefesCocina(req, res) {
     try {
-        const pedidoRepository = AppDataSource.getRepository(Pedido);
-        const pedidos = await pedidoRepository.find();
+        const jefedecocinaRepository = AppDataSource.getRepository(Jefedecocina);
+        const jefedecocina = await jefedecocinaRepository.find();
         res.status(200).json({
             message: "Pedidos obtenidos exitosamente",
-            data: pedidos
+            data: jefedecocina
         });
     } catch (error) {
         console.error("Error al obtener pedidos: ", error);
@@ -49,12 +50,12 @@ export async function getPedidos(req, res) {
     }
 }
 
-export async function getPedido(req, res) {
+export async function getJefeCocina(req, res) {
     const { id } = req.params;
     try {
-        const pedidoRepository = AppDataSource.getRepository(Pedido);
-        const pedido = await pedidoRepository.findOneBy({ id });
-        if (!pedido) {
+        const jefedecocinaRepository = AppDataSource.getRepository(Jefedecocina);
+        const jefedecocina = await jefedecocinaRepository.findOneBy({ id });
+        if (!jefedecocina) {
             return res.status(404).json({
                 message: "pedido no encontrado",
                 data: null
@@ -62,7 +63,7 @@ export async function getPedido(req, res) {
         }
         res.status(200).json({
             message: "pedido obtenido exitosamente",
-            data: pedido
+            data: jefedecocina
         });
     } catch (error) {
         console.error("Error al obtener pedido: ", error);
@@ -73,21 +74,21 @@ export async function getPedido(req, res) {
     }
 }
 
-export async function deletePedido(req, res) {
+export async function deleteJefeCocina(req, res) {
     const { id } = req.params;
     try {
-        const pedidoRepository = AppDataSource.getRepository(Pedido);
-        const pedido = await pedidoRepository.findOneBy({ id });
-        if (!pedido) {
+        const jefedecocinaRepository = AppDataSource.getRepository(Jefedecocina);
+        const jefedecocina = await jefedecocinaRepository.findOneBy({ id });
+        if (!jefedecocina) {
             return res.status(404).json({
                 message: "Pedido no encontrado",
                 data: null
             });
         }
-        await pedidoRepository.delete(pedido);
+        await jefedecocinaRepository.delete(jefedecocina);
         res.status(200).json({
             message: "pedido eliminado exitosamente",
-            data: pedido
+            data: jefedecocina
         });
     } catch (error) {
         console.error("Error al eliminar pedido: ", error);
@@ -98,23 +99,23 @@ export async function deletePedido(req, res) {
     }
 }
 
-export async function updatePedido(req, res) {
+export async function updateJefeCocina(req, res) {
     const { id } = req.params;
     const updateData = req.body;
     try {
-        const pedidoRepository = AppDataSource.getRepository(pedido);
-        let pedido = await pedidorRepository.findOneBy({ id });
-        if (!pedido) {
+        const jefedecocinaRepository = AppDataSource.getRepository(jefedecocina);
+        let jefedecocina = await jefedecocinaRepository.findOneBy({ id });
+        if (!jefedecocina) {
             return res.status(404).json({
                 message: "pedido no encontrado",
                 data: null
             });
         }
-        pedido = {...pedido, ...updateData};
-        const updatePedido = await pedidoRepository.save(pedido);
+        jefedecocina = {...jefedecocina, ...updateData};
+        const updateJefedecocina = await jefedecocinaRepository.save(jefedecocina);
         res.status(200).json({
             message: "Pedido actualizado exitosamente",
-            data: updatePedido
+            data: updateJefedecocina
         });
     } catch (error) {
         console.error("Error al actualizar administrador: ", error);
