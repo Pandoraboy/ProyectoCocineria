@@ -30,7 +30,7 @@ export async function createMesero(req, res) {
         });
     }
 }
-export async function getMesero(req, res) {
+export async function getMeseros(req, res) {
     try {
         const meseroRepository = AppDataSource.getRepository(Mesero);
         const mesero = await meseroRepository.find();

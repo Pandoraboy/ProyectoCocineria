@@ -30,7 +30,7 @@ export async function createTurno(req, res) {
         });
     }
 }
-export async function getTurno(req, res) {
+export async function getTurnos(req, res) {
     try {
         const turnoRepository = AppDataSource.getRepository(Turno);
         const turno = await turnoRepository.find();

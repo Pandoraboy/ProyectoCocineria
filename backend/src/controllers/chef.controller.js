@@ -30,7 +30,7 @@ export async function createChef(req, res) {
         });
     }
 }
-export async function getChef(req, res) {
+export async function getChefs(req, res) {
     try {
         const chefRepository = AppDataSource.getRepository(Chef);
         const chef = await chefRepository.find();

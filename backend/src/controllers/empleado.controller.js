@@ -30,18 +30,18 @@ export async function createEmpleado(req, res) {
         });
     }
 }
-export async function getEmpleado(req, res) {
+export async function getEmpleados(req, res) {
     try {
         const empleadoRepository = AppDataSource.getRepository(Empleado);
         const empleado = await empleadoRepository.find();
         res.status(200).json({
-            message: "Empleado obtenidos exitosamente",
+            message: "Empleados obtenidos exitosamente",
             data: empleado
         });
     } catch (error) {
-        console.error("Error al obtener empleado: ", error);
+        console.error("Error al obtener empleados: ", error);
         return res.status(500).json({
-            message: "Error al obtener empleado.",
+            message: "Error al obtener empleados.",
             error: error.message
         });
     }
