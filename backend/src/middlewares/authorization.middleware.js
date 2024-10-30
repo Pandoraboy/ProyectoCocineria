@@ -1,4 +1,5 @@
-import User from "../entity/user.entity.js";
+import administrador from "../entity/administrador.entity.js";
+import JefeDeCocina from "../entity/jefedecocina.entity.js";
 import { AppDataSource } from "../config/configDb.js";
 import {
 handleErrorClient,
@@ -7,11 +8,11 @@ handleErrorServer,
 
 export async function isAdmin(req, res, next) {
 try {
-    const userRepository = AppDataSource.getRepository(User);
+    const administradorRepository = AppDataSource.getRepository(administrador);
 
-    const userFound = await userRepository.findOneBy({ email: req.user.email });
+    const administradorFound = await administradorRepository.findOneBy({ id: req.user.id  });
 
-    if (!userFound) {
+    if (!administradorFound) {
     return handleErrorClient(
         res,
         404,
@@ -19,9 +20,9 @@ try {
     );
     }
 
-    const rolUser = userFound.rol;
+    const rolAdministrador = administradorFound.rol;
 
-    if (rolUser !== "administrador") {
+    if (rolAdministrador !== "administrador") {
         return handleErrorClient(
             res,
             403,
@@ -38,3 +39,33 @@ try {
     );
 }
 }
+
+export async function isJefeDeCocina(req, res, next) {
+    try {
+        const jefeDeCocinaRepository = AppDataSource.getRepository(JefeDeCocina);
+
+        // Busca si existe un Jefe de cocina con el id del usuario autenticado
+        const jefeDeCocinaFound = await jefeDeCocinaRepository.findOneBy({ id: req.user.id });
+
+        if (!jefeDeCocinaFound) {
+            return handleErrorClient(
+                res,
+                403,
+                "Error al acceder al recurso",
+                "Se requiere un rol de Jefe de cocina para realizar esta acción."
+            );
+        }
+
+        // Si el usuario es Jefe de cocina, continúa con la solicitud
+        next();
+    } catch (error) {
+        handleErrorServer(
+            res,
+            500,
+            error.message,
+        );
+    }
+}
+
+
+
