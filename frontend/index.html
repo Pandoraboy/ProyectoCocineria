@@ -5,19 +5,129 @@
     <link rel="icon" type="image/svg+xml" href="/rocket.svg" />
     <link href="https://unpkg.com/tabulator-tables@4.9.1/dist/css/tabulator.min.css" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ingeniería de Software</title>
+    <title>Restaurante</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      #menu {
+        width: 80%;
+        margin-top: 20px;
+      }
+      .login-box {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        width: 250px;
+        padding: 20px;
+        display: none;
+        flex-direction: column;
+        align-items: center;
+      }
+      .login-box input {
+        width: 100%;
+        padding: 10px;
+        margin: 5px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+      .login-box button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      .login-box button:hover {
+        background-color: #45a049;
+      }
+      .login-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: #f8f8f8;
+        border: 1px solid #ccc;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+      }
+      .login-toggle img {
+        width: 30px;
+        height: 30px;
+      }
+    </style>
   </head>
   <body>
-    <div id="root"></div>
+    <div id="menu">
+      <h1>Menú del Restaurante</h1>
+    <p>Hola Mundo</p>
+    <div id="menu">
+    </div>
+    <div class="login-toggle" onclick="toggleLoginBox()">
+      <img src="/login-icon.svg" alt="Login">
+    </div>
+    <div class="login-box" id="login-box">
+      <h2>Login</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Login</button>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
       document.addEventListener('visibilitychange', function() {
           if (document.hidden) {
               document.title = '¿Todo bien por allá? 👀';
           } else {
-              document.title = 'Ingeniería de Software';
+              document.title = 'Restaurante Delicioso';
           }
       });
-  </script>
+
+      // Example data for the menu
+      var tabledata = [
+        {id:1, name:"Pizza Margherita", price:"$10"},
+        {id:2, name:"Spaghetti Carbonara", price:"$12"},
+        {id:3, name:"Tiramisu", price:"$6"},
+      ];
+
+      // Create Tabulator on DOM element with id "menu-table"
+      var table = new Tabulator("#menu-table", {
+        data:tabledata, //assign data to table
+        layout:"fitColumns", //fit columns to width of table
+        columns:[ //Define Table Columns
+          {title:"Nombre", field:"name", width:200},
+          {title:"Precio", field:"price", align:"left"},
+        ],
+      });
+
+      function toggleLoginBox() {
+        var loginBox = document.getElementById('login-box');
+        if (loginBox.style.display === 'none' || loginBox.style.display === '') {
+          loginBox.style.display = 'flex';
+        } else {
+          loginBox.style.display = 'none';
+        }
+      }
+
+      function login() {
+        var username = document.getElementById('username').value;
+        var password = document.getElementById('password').value;
+        alert('Username: ' + username + '\nPassword: ' + password);
+      }
+    </script>
   </body>
 </html>
