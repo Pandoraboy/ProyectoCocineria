@@ -1,25 +1,27 @@
 "use strict";
-import Proveedor from '../entity/proveedor.entity.js';
+import Provee from '../entity/provee.entity.js';
+import ProveedorID from '../entity/proveedor.entity.js';
+import IngredienteID from '../entity/ingrediente.entity.js';
 import { AppDataSource } from '../config/configDb.js';
 
-export async function createProveedor(req, res) {
+export async function createProvee(req, res) {
     try {
-        const proveedorRepository = AppDataSource.getRepository(Proveedor);
-        const { AdministradorID, Nombre, Contacto, Direccion } = req.body;
+        const proveeRepository = AppDataSource.getRepository(Provee);
+        const { ProveedorID, IngredienteID} = req.body;
 
-        if (!AdministradorID || !Nombre || !Contacto || !Direccion) {
+        if (!proveedorID || !IngredienteID) {
             return res.status(400).json({
                 message: "Todos los campos son obligatorios.",
                 data: null
             });
         }
 
-        const newProveedor = proveedorRepository.create({ AdministradorID, Nombre, Contacto, Direccion });
-        const proveedorSaved = await proveedorRepository.save(newProveedor);
+        const newProvee = proveeRepository.create({ ProveedorID, IngredienteID });
+        const proveeSaved = await proveeRepository.save(newProvee);
 
         res.status(201).json({
             message: "Proveedor creado exitosamente",
-            data: proveedorSaved
+            data: proveeSaved
         });
     } catch (error) {
         console.error("Error al crear proveedor: ", error);
@@ -30,13 +32,13 @@ export async function createProveedor(req, res) {
     }
 }
 
-export async function getProveedores(req, res) {
+export async function getProvee(req, res) {
     try {
-        const proveedorRepository = AppDataSource.getRepository(Proveedor);
-        const proveedores = await proveedorRepository.find();
+        const proveeRepository = AppDataSource.getRepository(Provee);
+        const provee = await proveeRepository.find();
         res.status(200).json({
             message: "Proveedores obtenidos exitosamente",
-            data: proveedores
+            data: provee
         });
     } catch (error) {
         console.error("Error al obtener proveedores: ", error);
@@ -47,12 +49,12 @@ export async function getProveedores(req, res) {
     }
 }
 
-export async function getProveedor(req, res) {
+export async function getProvee(req, res) {
     const { id } = req.params;
     try {
-        const proveedorRepository = AppDataSource.getRepository(Proveedor);
-        const proveedor = await proveedorRepository.findOneBy({ id });
-        if (!proveedor) {
+        const proveeRepository = AppDataSource.getRepository(Provee);
+        const provee = await proveeRepository.findOneBy({ id });
+        if (!provee) {
             return res.status(404).json({
                 message: "Proveedor no encontrado",
                 data: null
@@ -60,7 +62,7 @@ export async function getProveedor(req, res) {
         }
         res.status(200).json({
             message: "Proveedor obtenido exitosamente",
-            data: proveedor
+            data: provee
         });
     } catch (error) {
         console.error("Error al obtener proveedor: ", error);
@@ -71,21 +73,21 @@ export async function getProveedor(req, res) {
     }
 }
 
-export async function deleteProveedor(req, res) {
+export async function deleteProvee(req, res) {
     const { id } = req.params;
     try {
-        const proveedorRepository = AppDataSource.getRepository(Proveedor);
-        const proveedor = await proveedorRepository.findOneBy({ id });
-        if (!proveedor) {
+        const proveeRepository = AppDataSource.getRepository(Provee);
+        const provee = await proveeRepository.findOneBy({ id });
+        if (!provee) {
             return res.status(404).json({
                 message: "Proveedor no encontrado",
                 data: null
             });
         }
-        await proveedorRepository.remove(proveedor);
+        await proveeRepository.remove(provee);
         res.status(200).json({
             message: "Proveedor eliminado exitosamente",
-            data: proveedor
+            data: provee
         });
     } catch (error) {
         console.error("Error al eliminar proveedor: ", error);
@@ -96,23 +98,23 @@ export async function deleteProveedor(req, res) {
     }
 }
 
-export async function updateProveedor(req, res) {
+export async function updateProvee(req, res) {
     const { id } = req.params;
     const updateData = req.body;
     try {
-        const proveedorRepository = AppDataSource.getRepository(Proveedor);
-        let proveedor = await proveedorRepository.findOneBy({ id });
-        if (!proveedor) {
+        const proveeRepository = AppDataSource.getRepository(Provee);
+        let provee = await proveeRepository.findOneBy({ id });
+        if (!provee) {
             return res.status(404).json({
                 message: "Proveedor no encontrado",
                 data: null
             });
         }
-        proveedor = { ...proveedor, ...updateData };
-        const updatedProveedor = await proveedorRepository.save(proveedor);
+        provee = { ...provee, ...updateData };
+        const updatedProvee = await proveeRepository.save(provee);
         res.status(200).json({
             message: "Proveedor actualizado exitosamente",
-            data: updatedProveedor
+            data: updatedProvee
         });
     } catch (error) {
         console.error("Error al actualizar proveedor: ", error);
